@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+
+import re
+from sys import argv, stdin
+
+def print_usage():
+    print("Usage:")
+    print("{} <pattern> <string>".format(argv[0]))
+    print("some_command | {} <pattern>".format(argv[0]))
+
+def print_match(line, pattern):
+    match = re.search(pattern, line)
+    if match is not None:
+        result = match.groups()[0]
+        print(result)
+
+
+if len(argv)==2:
+    _, pattern = argv
+    for line in stdin:
+        line=line.replace('\n','')
+        print_match(line, pattern)
+elif len(argv)==3:
+    _, pattern, s = argv
+    lines = s.split('\n')
+    for line in lines:
+        print_match(line, pattern)
+else:
+    print_usage()
+    exit(1)

@@ -8,7 +8,9 @@ Usage:
 some_command | ./rgx <pattern>
 ```
 
-It isn't trivial to extract text matching a certain regex from a string or stdout of some command. `grep` is a fantastic tool but it always prints the entire matched line.  This tool takes a pattern and a string (or reads from stdin if a string is not provided), and outputs the first capture group from each line of the input.
+This tool takes a pattern and a string (or reads from stdin if a string is not provided), and outputs the first capture group from each line of the input.
+
+Note: This is similar but not identical to `grep -oE`, which prints out the entire matched portion of the input, as opposed to just the captured group.
 
 ### Some examples of the tool in use:
 
@@ -20,8 +22,14 @@ Now drawing from 'Battery Power'
  -InternalBattery-0 (id=3866723)	65%; discharging; 2:35 remaining present: true
 
 
-$ pmset -g batt | rgx "(\d+%)"
-65%
+$ pmset -g batt | rgx "(\d+)%"
+65
+
+```
+You would need two `grep`s to achieve the same output, because grep returns all of the matched output, not just the capture group:
+
+```
+$ pmset -g batt | grep -oE "\d+%" | grep -oE "\d+"
 ```
 
 ##### Show pages accessed on your web server

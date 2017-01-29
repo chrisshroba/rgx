@@ -1,11 +1,11 @@
-# regex
-### A command line tool for extracting regex capture groups
+# rgx
+### Command line tool for extracting regex capture groups
 
 
 ```
 Usage:
-./regex <pattern> <string>
-some_command | ./regex <pattern>
+./rgx <pattern> <string>
+some_command | ./rgx <pattern>
 ```
 
 It isn't trivial to extract text matching a certain regex from a string or stdout of some command. `grep` is a fantastic tool but it always prints the entire matched line.  This tool takes a pattern and a string (or reads from stdin if a string is not provided), and outputs the first capture group from each line of the input.
@@ -20,14 +20,14 @@ Now drawing from 'Battery Power'
  -InternalBattery-0 (id=3866723)	65%; discharging; 2:35 remaining present: true
 
 
-$ pmset -g batt | ./regex "(\d+%)"
+$ pmset -g batt | rgx "(\d+%)"
 65%
 ```
 
 ##### Show pages accessed on your web server
 
 ```
-$ cat /var/log/nginx/access.log | ~/regex "GET (.*) HTTP/1.1"
+$ cat /var/log/nginx/access.log | rgx "GET (.*) HTTP/1.1"
 /
 /robots.txt
 /
@@ -42,7 +42,7 @@ $ cat /var/log/nginx/access.log | ~/regex "GET (.*) HTTP/1.1"
 Then sort pages by most visited
 
 ```
-$ cat /var/log/nginx/access.log.1 | ~/regex "GET (.*) HTTP/1.1" | sort | uniq -c | sort -n
+$ cat /var/log/nginx/access.log.1 | rgx "GET (.*) HTTP/1.1" | sort | uniq -c | sort -n
 4 /index.html
 8 /apple-touch-icon-120x120.png
 8 /apple-touch-icon-120x120-precomposed.png

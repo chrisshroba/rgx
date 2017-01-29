@@ -8,7 +8,7 @@ Usage:
 some_command | ./regex <pattern>
 ```
 
-It isn't trivial to extract text matching a certain regex from a string or stdout of some command. `grep` is a fantastic tool but it always prints the entire matched line.  This tool takes a pattern and a string (or reads from stdin if a string is not provided), and outputs only the first capture group from the input.
+It isn't trivial to extract text matching a certain regex from a string or stdout of some command. `grep` is a fantastic tool but it always prints the entire matched line.  This tool takes a pattern and a string (or reads from stdin if a string is not provided), and outputs the first capture group from each line of the input.
 
 ### Some examples of the tool in use:
 
